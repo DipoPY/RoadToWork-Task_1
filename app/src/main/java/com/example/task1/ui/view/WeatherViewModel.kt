@@ -1,6 +1,8 @@
 package com.example.task1.ui.view
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,12 +16,16 @@ class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() 
     val weather: LiveData<WeatherDays> get() = _weather
 
 
+
+
     init {
-        fetchWeather("London", 10)
+        fetchWeather()
     }
 
-    fun fetchWeather(city: String, days: Int) {
+    fun fetchWeather(city: String = "Moscow", days: Int = 3) {
         viewModelScope.launch {
+            Log.d("myy", city)
+
             try {
                 Log.d("WeatherViewModel", "Fetching weather data for city: $city")
                 val response = repository.getWeatherForecast(city, days)
@@ -28,6 +34,7 @@ class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() 
                 Log.d("WeatherViewModel", "Weather data fetched successfully")
             } catch (e: Exception) {
                 Log.e("WeatherViewModel", "Error fetching weather data", e)
+
             }
         }
     }

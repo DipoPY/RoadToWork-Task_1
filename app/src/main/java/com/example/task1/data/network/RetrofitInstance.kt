@@ -17,9 +17,9 @@ object RetrofitInstance{
     }
 
     private val client = OkHttpClient.Builder()
-        .connectTimeout(300, TimeUnit.SECONDS)
-        .readTimeout(300, TimeUnit.SECONDS)
-        .writeTimeout(300, TimeUnit.SECONDS)
+        .connectTimeout(100, TimeUnit.SECONDS)
+        .readTimeout(100, TimeUnit.SECONDS)
+        .writeTimeout(100, TimeUnit.SECONDS)
         .build()
 
     val api: WeatherApiService by lazy {
